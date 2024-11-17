@@ -1,0 +1,31 @@
+-- Crear la base de datos si no existe
+CREATE DATABASE IF NOT EXISTS InventarioTiendas;
+
+-- Usar la base de datos
+USE InventarioTiendas;
+
+-- Crear la tabla Producto
+CREATE TABLE Producto (
+    IDProducto INT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Descripcion TEXT,
+    Cantidad INT NOT NULL,
+    UmbralMinimo INT NOT NULL
+);
+
+-- Crear la tabla Proveedor
+CREATE TABLE Proveedor (
+    IDProveedor INT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Contacto VARCHAR(50)
+);
+
+-- Crear la tabla OrdenDeCompra con una clave foránea a Producto
+CREATE TABLE OrdenDeCompra (
+    IDOrden INT PRIMARY KEY,
+    Fecha DATE NOT NULL,
+    CantidadSolicitada INT NOT NULL,
+    EstadoOrden VARCHAR(50) NOT NULL,
+    IDProducto INT,
+    FOREIGN KEY (IDProducto) REFERENCES Producto(IDProducto)
+);
